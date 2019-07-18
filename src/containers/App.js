@@ -5,8 +5,10 @@ import Cantor from './cantor/Cantor';
 
 class App extends Component {
     state = {
-        login: false,
-        loginName: '',
+        // login: false,
+        // loginName: '',
+        login: true,
+        loginName: 'Dominik'
     };
 
     handleLoginTrue = () => {
@@ -32,13 +34,19 @@ class App extends Component {
         });
     };
 
+    handleLogOut = () => {
+        this.setState({
+            login: !this.state.login
+        });
+    };
+
     render() {
         const { login, loginName } = this.state;
         const loginData = login;
 
         return (
             loginData ?
-                <Cantor />
+                <Cantor userName={loginName} handleLogOut={this.handleLogOut} />
                 :
                 <Login
                     loginName={loginName}
