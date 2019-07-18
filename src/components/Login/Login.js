@@ -6,8 +6,10 @@ const Login = ({ handleButton, handleInput, loginName }) => {
             <h1>Login panel</h1>
             <input
                 type='text'
-                onChange={handleInput}
                 value={loginName}
+                onChange={handleInput}
+                minLength='3'
+                maxLength='10'
                 placeholder='Please enter name...'
             />
             <button onClick={() => handleButton()} type='submit'>Log in</button>

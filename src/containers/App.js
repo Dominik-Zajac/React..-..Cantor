@@ -10,12 +10,19 @@ class App extends Component {
     }
 
     handleLoginTrue = () => {
-        if (this.state.loginName.length >= 4) {
-            this.setState({
-                login: !this.state.login
-            });
+        const regex = /[0-9]/g;
+        const verificationName = regex.exec(this.state.loginName);
+
+        if (!verificationName) {
+            if (this.state.loginName.length >= 4) {
+                this.setState({
+                    login: !this.state.login
+                });
+            } else {
+                alert('The name is too short!');
+            }
         } else {
-            alert('The name is too short!');
+            alert('It can not be numbers!');
         }
     };
 
@@ -41,6 +48,5 @@ class App extends Component {
         );
     };
 };
-
 
 export default App;
