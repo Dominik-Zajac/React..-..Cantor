@@ -7,7 +7,7 @@ class App extends Component {
     state = {
         login: false,
         loginName: '',
-    }
+    };
 
     handleLoginTrue = () => {
         const regex = /[0-9]/g;
