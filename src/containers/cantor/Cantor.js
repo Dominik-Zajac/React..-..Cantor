@@ -26,6 +26,10 @@ class Cantor extends Component {
         };
     };
 
+    handleBuyCurrency = (currency) => {
+        console.log(currency)
+    };
+
     render() {
         return (
             <div className='cantor_container'>
@@ -34,7 +38,9 @@ class Cantor extends Component {
                     handleLogOut={this.props.handleLogOut}
                 />
                 <div>
-                    <Currencies currencies={this.state.currencies} />
+                    <Currencies
+                        currencies={this.state.currencies}
+                        buyCurrency={this.handleBuyCurrency} />
                     <Wallet />
                 </div>
             </div>
