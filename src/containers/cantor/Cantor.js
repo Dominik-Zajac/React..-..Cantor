@@ -6,30 +6,35 @@ import Wallet from '../../components/Wallet/Wallet';
 import './Cantor.css';
 
 class Cantor extends Component {
-    state = {
-        currencies: ''
+    constructor(props) {
+        super(props);
+        this.state = {
+            currencies: []
+        }
     }
 
-    handleData(data) {
-        let result = JSON.parse(data);
-        result.Items.forEach(item => {
+    componentDidMount() {
+        const connect = new WebSocket('ws://webtask.future-processing.com:8068/ws/currencies');
+
+        connect.onmessage = (e) => {
+            const jsonData = JSON.parse(e.data);
+            const data = jsonData;
+
             this.setState({
-                currencies: [...this.state.currencies, item]
-            })
-        });
+                currencies: data.Items
+            });
+        };
     };
 
     render() {
         return (
             <div className='cantor_container'>
-                <Websocket url='ws://webtask.future-processing.com:8068/ws/currencies'
-                    onMessage={this.handleData.bind(this)} />
                 <Header
                     userName={this.props.userName}
                     handleLogOut={this.props.handleLogOut}
                 />
                 <div>
-                    <Currencies />
+                    <Currencies currencies={this.state.currencies} />
                     <Wallet />
                 </div>
             </div>
