@@ -1,3 +1,8 @@
 .cantor_container {
-    width: 80vw;
+    width: 90vw;
+}
+
+.information_box {
+    display: flex;
+    justify-content: space-between;
 }

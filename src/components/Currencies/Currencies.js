@@ -5,9 +5,7 @@ import styled from 'styled-components';
     ~~Styles~~
 */
 const Container = styled.div`
-    max-width: 40%;
     margin: 1% 0;
-    // border: 1px solid #000;
 `;
 
 const Table = styled.table`
@@ -16,7 +14,7 @@ const Table = styled.table`
 
 const ColumnHead = styled.th`
     border: 1px solid #000;
-    padding: .5em 1em;
+    padding: 1em;
     text-align: center;
     background-color: #44bd32;
 `;
@@ -29,11 +27,12 @@ const Row = styled.tr`
 
 const Column = styled.td`
     border: 1px solid #000;
-    padding: .6em 2em;
+    padding: 1em;
     text-align: center;
 `;
 
 const BuyBtn = styled.button`
+    min-width: 80px;
     padding: 0.25em 1em;  
     font-size: 1em;
     cursor: pointer;

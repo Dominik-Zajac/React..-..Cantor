@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Websocket from 'react-websocket';
 import Header from '../../components/Header/Header';
 import Currencies from '../../components/Currencies/Currencies';
 import Wallet from '../../components/Wallet/Wallet';
@@ -30,6 +29,10 @@ class Cantor extends Component {
         console.log(currency)
     };
 
+    handleSellCurrency = (currency) => {
+        console.log(currency)
+    };
+
     render() {
         return (
             <div className='cantor_container'>
@@ -37,11 +40,15 @@ class Cantor extends Component {
                     userName={this.props.userName}
                     handleLogOut={this.props.handleLogOut}
                 />
-                <div>
+                <div className='information_box'>
                     <Currencies
                         currencies={this.state.currencies}
-                        buyCurrency={this.handleBuyCurrency} />
-                    <Wallet />
+                        buyCurrency={this.handleBuyCurrency}
+                    />
+                    <Wallet
+                        currencies={this.state.currencies}
+                        sellCurrency={this.handleSellCurrency}
+                    />
                 </div>
             </div>
         );
