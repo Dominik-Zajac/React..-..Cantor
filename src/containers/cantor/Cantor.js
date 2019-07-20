@@ -8,7 +8,8 @@ class Cantor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currencies: []
+            currencies: [],
+            publicationDate: ''
         }
     }
 
@@ -20,7 +21,8 @@ class Cantor extends Component {
             const data = jsonData;
 
             this.setState({
-                currencies: data.Items
+                currencies: data.Items,
+                publicationDate: data.PublicationDate,
             });
         };
     };
@@ -43,6 +45,7 @@ class Cantor extends Component {
                 <div className='information_box'>
                     <Currencies
                         currencies={this.state.currencies}
+                        publicationDate={this.state.publicationDate}
                         buyCurrency={this.handleBuyCurrency}
                     />
                     <Wallet

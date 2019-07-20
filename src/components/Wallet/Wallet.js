@@ -13,12 +13,10 @@ const Container = styled.div`
     flex-direction: column;
     margin: 1% 0;
 `;
-
 /* ------------------------------- */
 
 const Wallet = (props) => {
-
-
+    //Checking if the data has been downloaded
     if (props.currencies[0] !== undefined) {
         return (
             <Container>

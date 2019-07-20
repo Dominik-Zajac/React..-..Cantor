@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+/* Components */
+import PublicationDate from './PublicationDate/PublicationDate';
+
 /*
     ~~Styles~~
 */
@@ -73,6 +76,7 @@ const Currencies = (props) => {
                         {arrayCurrencies}
                     </tbody>
                 </Table>
+                <PublicationDate date={props.publicationDate} />
             </Container>
         );
     } else {
