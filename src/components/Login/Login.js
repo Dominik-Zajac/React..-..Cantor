@@ -42,17 +42,25 @@ const Button = styled.button`
 
 /* ------------------------------- */
 
-const Login = ({ handleButton, handleInput, loginName }) => {
+const Login = ({ handleButton, handleInput, loginName, amountMoney }) => {
     return (
         <Wrapper>
             <Title>Login panel</Title>
             <Input
                 type='text'
+                name='loginName'
                 value={loginName}
                 onChange={handleInput}
                 minLength='3'
-                maxLength='10'
+                maxLength='7'
                 placeholder='Please enter name...'
+            />
+            <Input
+                type='number'
+                name='amountMoney'
+                value={amountMoney}
+                onChange={handleInput}
+                placeholder='Please enter money...'
             />
             <Button onClick={() => handleButton()} type='submit'>Log in</Button>
         </Wrapper>

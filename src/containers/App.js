@@ -7,30 +7,37 @@ class App extends Component {
     state = {
         // login: false,
         // loginName: '',
+        amountMoney: '',
         login: true,
         loginName: 'Dominik'
     };
 
     handleLoginTrue = () => {
+        const { login, loginName, amountMoney } = this.state;
         const regex = /[0-9]/g;
-        const verificationName = regex.exec(this.state.loginName);
+        const verificationName = regex.exec(loginName);
 
         if (!verificationName) {
-            if (this.state.loginName.length >= 4) {
+            if (loginName.length >= 4 && amountMoney < 100000) {
                 this.setState({
-                    login: !this.state.login
+                    login: !login
                 });
-            } else {
+            } else if (amountMoney > 100000) {
+                alert('The number is too big (max:100000)!');
+            }
+            else {
                 alert('The name is too short!');
             }
         } else {
-            alert('It can not be numbers!');
+            alert('In name cannot be numbers!');
         }
     };
 
     handleChangeInput = event => {
+        const name = event.target.name;
+
         this.setState({
-            loginName: event.target.value
+            [name]: event.target.value
         });
     };
 
@@ -41,15 +48,20 @@ class App extends Component {
     };
 
     render() {
-        const { login, loginName } = this.state;
+        const { login, loginName, amountMoney } = this.state;
         const loginData = login;
 
         return (
             loginData ?
-                <Cantor userName={loginName} handleLogOut={this.handleLogOut} />
+                <Cantor
+                    userName={loginName}
+                    amountMoney={amountMoney}
+                    handleLogOut={this.handleLogOut}
+                />
                 :
                 <Login
                     loginName={loginName}
+                    amountMoney={amountMoney}
                     handleButton={this.handleLoginTrue}
                     handleInput={this.handleChangeInput}
                 />

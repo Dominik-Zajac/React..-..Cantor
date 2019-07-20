@@ -46,6 +46,7 @@ class Cantor extends Component {
                         buyCurrency={this.handleBuyCurrency}
                     />
                     <Wallet
+                        amountMoney={this.props.amountMoney}
                         currencies={this.state.currencies}
                         sellCurrency={this.handleSellCurrency}
                     />

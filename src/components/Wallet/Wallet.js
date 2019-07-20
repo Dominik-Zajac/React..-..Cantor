@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import AvailableMoney from './AvailableMoney/AvailableMoney';
 
 /*
     ~~Styles~~
@@ -77,6 +78,7 @@ const Wallet = (props) => {
                         {arrayCurrencies}
                     </tbody>
                 </Table>
+                <AvailableMoney amountMoney={props.amountMoney} />
             </Container>
         );
     } else {
