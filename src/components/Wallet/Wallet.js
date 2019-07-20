@@ -16,12 +16,16 @@ const Container = styled.div`
 /* ------------------------------- */
 
 const Wallet = ({ currencies, amountMoney, sellCurrency }) => {
+
     //Checking if the data has been downloaded
     if (currencies[0] !== undefined) {
         return (
             <Container>
                 <h2>My Wallet</h2>
-                <TableWallet currencies={currencies} sellCurrency={sellCurrency} />
+                <TableWallet
+                    currencies={currencies}
+                    sellCurrency={sellCurrency}
+                />
                 <AvailableMoney amountMoney={amountMoney} />
             </Container>
         );

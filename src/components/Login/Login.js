@@ -39,7 +39,6 @@ const Button = styled.button`
     border: 2px solid #40739e;
     border-radius: 3px;
 `;
-
 /* ------------------------------- */
 
 const Login = ({ handleButton, handleInput, loginName, amountMoney }) => {

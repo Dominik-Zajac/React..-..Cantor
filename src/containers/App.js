@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+/* Components */
 import Login from '../components/Login/Login';
 import Cantor from './cantor/Cantor';
 
@@ -48,6 +49,7 @@ class App extends Component {
     };
 
     render() {
+
         const { login, loginName, amountMoney } = this.state;
         const loginData = login;
 

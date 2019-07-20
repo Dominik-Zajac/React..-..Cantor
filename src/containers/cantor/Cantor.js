@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import './Cantor.css';
+
+/* Components */
 import Header from '../../components/Header/Header';
 import Currencies from '../../components/Currencies/Currencies';
 import Wallet from '../../components/Wallet/Wallet';
-import './Cantor.css';
 
 class Cantor extends Component {
     constructor(props) {
@@ -10,8 +12,8 @@ class Cantor extends Component {
         this.state = {
             currencies: [],
             publicationDate: ''
-        }
-    }
+        };
+    };
 
     componentDidMount() {
         const connect = new WebSocket('ws://webtask.future-processing.com:8068/ws/currencies');
@@ -36,27 +38,31 @@ class Cantor extends Component {
     };
 
     render() {
+
+        const { userName, handleLogOut, amountMoney } = this.props;
+        const { currencies, publicationDate } = this.state;
+
         return (
             <div className='cantor_container'>
                 <Header
-                    userName={this.props.userName}
-                    handleLogOut={this.props.handleLogOut}
+                    userName={userName}
+                    handleLogOut={handleLogOut}
                 />
                 <div className='information_box'>
                     <Currencies
-                        currencies={this.state.currencies}
-                        publicationDate={this.state.publicationDate}
+                        currencies={currencies}
+                        publicationDate={publicationDate}
                         buyCurrency={this.handleBuyCurrency}
                     />
                     <Wallet
-                        amountMoney={this.props.amountMoney}
-                        currencies={this.state.currencies}
+                        currencies={currencies}
+                        amountMoney={amountMoney}
                         sellCurrency={this.handleSellCurrency}
                     />
                 </div>
             </div>
         );
-    }
-}
+    };
+};
 
 export default Cantor;

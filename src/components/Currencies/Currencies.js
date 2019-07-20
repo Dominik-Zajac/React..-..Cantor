@@ -13,13 +13,18 @@ const Container = styled.div`
 `;
 /* ------------------------------- */
 
-const Currencies = (props) => {
-    if (props.currencies[0] !== undefined) {
+const Currencies = ({ currencies, buyCurrency, publicationDate }) => {
+
+    //Checking if the data has been downloaded
+    if (currencies[0] !== undefined) {
         return (
             <Container>
                 <h2>Currencies</h2>
-                <TableCurrencies currencies={props.currencies} buyCurrency={props.buyCurrency} />
-                <PublicationDate date={props.publicationDate} />
+                <TableCurrencies
+                    currencies={currencies}
+                    buyCurrency={buyCurrency}
+                />
+                <PublicationDate date={publicationDate} />
             </Container>
         );
     } else {
