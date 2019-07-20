@@ -15,14 +15,14 @@ const Container = styled.div`
 `;
 /* ------------------------------- */
 
-const Wallet = (props) => {
+const Wallet = ({ currencies, amountMoney, sellCurrency }) => {
     //Checking if the data has been downloaded
-    if (props.currencies[0] !== undefined) {
+    if (currencies[0] !== undefined) {
         return (
             <Container>
                 <h2>My Wallet</h2>
-                <TableWallet currencies={props.currencies} />
-                <AvailableMoney amountMoney={props.amountMoney} />
+                <TableWallet currencies={currencies} sellCurrency={sellCurrency} />
+                <AvailableMoney amountMoney={amountMoney} />
             </Container>
         );
     } else {
