@@ -59,7 +59,7 @@ class App extends Component {
 
     render() {
 
-        const { login, loginName, amountMoney } = this.state;
+        const { login, loginName } = this.state;
         const loginData = login;
 
         return (
@@ -67,7 +67,6 @@ class App extends Component {
                 <ApolloProvider client={client}>
                     <Cantor
                         userName={loginName}
-                        amountMoney={amountMoney}
                         handleLogOut={this.handleLogOut}
                     />
                 </ApolloProvider>

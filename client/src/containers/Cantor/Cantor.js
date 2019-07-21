@@ -1,28 +1,12 @@
 import React, { Component } from 'react';
-import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
+import { getWalletQuery } from '../../queries/queries';
 import './Cantor.css';
 
 /* Components */
 import Header from '../../components/Header/Header';
 import Currencies from '../../components/Currencies/Currencies';
 import Wallet from '../../components/Wallet/Wallet';
-
-const getWalletQuery = gql`
-    {
-        wallets {
-            id
-            name
-            valueUSD
-            valueEUR
-            valueCHF
-            valueRUB
-            valueCZK
-            valueGBP
-            amountMoney
-        }
-    }
-`
 
 class Cantor extends Component {
     constructor(props) {
@@ -47,32 +31,21 @@ class Cantor extends Component {
         };
     };
 
-    wallets() {
-        var data = this.props.data;
-        if (data.loading) {
-            console.log('Loading')
-        } else {
-            return data.wallets.map(wallet => {
-                return console.log(wallet)
-            })
-        }
-    }
-
     handleBuyCurrency = (currency) => {
-        console.log(currency)
+        alert(currency);
     };
 
     handleSellCurrency = (currency) => {
-        console.log(currency)
+        alert(currency);
     };
 
     render() {
+
         const { userName, handleLogOut } = this.props;
         const { currencies, publicationDate } = this.state;
 
         return (
             <div className='cantor_container'>
-                <button onClick={() => this.wallets()}>sadadsads</button>
                 <Header
                     userName={userName}
                     handleLogOut={handleLogOut}
@@ -85,12 +58,10 @@ class Cantor extends Component {
                     />
                     <Wallet
                         currencies={currencies}
-                        currenciesDB={this.wallets}
+                        currenciesDB={this.props.data.loading ? 'Loading...' : this.props.data.wallets}
                         amountMoney={this.props.data.loading ? 'Loading...' : this.props.data.wallets[0].amountMoney}
                         sellCurrency={this.handleSellCurrency}
                     />
-
-
                 </div>
             </div>
         );
