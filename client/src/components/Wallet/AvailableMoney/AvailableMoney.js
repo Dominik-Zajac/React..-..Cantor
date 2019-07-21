@@ -14,14 +14,14 @@ const AvailableMoney = ({ amountMoney }) => {
     return (
         <>
             <h2>Available PLN:
-                <NumberMoney>{amountMoney < 1 ? `Lack of money!` : amountMoney}</NumberMoney>
+                <NumberMoney>{amountMoney}</NumberMoney>
             </h2>
         </>
     );
 };
 
 AvailableMoney.propTypes = {
-    amountMoney: PropTypes.string,
+    amountMoney: PropTypes.number,
 };
 
 export default AvailableMoney;

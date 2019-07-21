@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { graphql } from 'react-apollo';
+import { getWalletQuery } from '../../queries/queries';
 import './Cantor.css';
 
 /* Components */
@@ -30,16 +32,16 @@ class Cantor extends Component {
     };
 
     handleBuyCurrency = (currency) => {
-        console.log(currency)
+        alert(currency);
     };
 
     handleSellCurrency = (currency) => {
-        console.log(currency)
+        alert(currency);
     };
 
     render() {
 
-        const { userName, handleLogOut, amountMoney } = this.props;
+        const { userName, handleLogOut } = this.props;
         const { currencies, publicationDate } = this.state;
 
         return (
@@ -56,7 +58,8 @@ class Cantor extends Component {
                     />
                     <Wallet
                         currencies={currencies}
-                        amountMoney={amountMoney}
+                        currenciesDB={this.props.data.loading ? 'Loading...' : this.props.data.wallets}
+                        amountMoney={this.props.data.loading ? 'Loading...' : this.props.data.wallets[0].amountMoney}
                         sellCurrency={this.handleSellCurrency}
                     />
                 </div>
@@ -65,4 +68,4 @@ class Cantor extends Component {
     };
 };
 
-export default Cantor;
+export default graphql(getWalletQuery)(Cantor);

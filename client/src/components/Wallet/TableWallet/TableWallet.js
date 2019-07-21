@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 /*
     ~~Styles~~
@@ -40,15 +40,14 @@ const SellBtn = styled.button`
 `;
 /* ------------------------------- */
 
-const TableWallet = ({ currencies, sellCurrency }) => {
+const TableWallet = ({ currencies, currenciesDB, sellCurrency }) => {
 
-    //Mapping the array to individual elements
     const arrayCurrencies = currencies.map((currency, index) => (
         <Row key={index}>
             <Column>{currency.Code}</Column>
             <Column>{currency.PurchasePrice.toFixed(2)}</Column>
             <Column>100</Column>
-            <Column>{currency.PurchasePrice.toFixed(2)}</Column>
+            <Column>{currency.PurchasePrice.toFixed(2) * 100}</Column>
             <Column>
                 <SellBtn onClick={() => sellCurrency(`${currency.Code}`)}>Sell</SellBtn >
             </Column>

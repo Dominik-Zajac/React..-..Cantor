@@ -15,7 +15,7 @@ const Container = styled.div`
 `;
 /* ------------------------------- */
 
-const Wallet = ({ currencies, amountMoney, sellCurrency }) => {
+const Wallet = ({ currencies, currenciesDB, amountMoney, sellCurrency }) => {
 
     //Checking if the data has been downloaded
     if (currencies[0] !== undefined) {
@@ -24,6 +24,7 @@ const Wallet = ({ currencies, amountMoney, sellCurrency }) => {
                 <h2>My Wallet</h2>
                 <TableWallet
                     currencies={currencies}
+                    currenciesDB={currenciesDB}
                     sellCurrency={sellCurrency}
                 />
                 <AvailableMoney amountMoney={amountMoney} />
