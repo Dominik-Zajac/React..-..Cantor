@@ -47,6 +47,17 @@ class Cantor extends Component {
         };
     };
 
+    wallets() {
+        var data = this.props.data;
+        if (data.loading) {
+            console.log('Loading')
+        } else {
+            return data.wallets.map(wallet => {
+                return console.log(wallet)
+            })
+        }
+    }
+
     handleBuyCurrency = (currency) => {
         console.log(currency)
     };
@@ -56,12 +67,12 @@ class Cantor extends Component {
     };
 
     render() {
-        console.log(this.props)
-        const { userName, handleLogOut, amountMoney } = this.props;
+        const { userName, handleLogOut } = this.props;
         const { currencies, publicationDate } = this.state;
 
         return (
             <div className='cantor_container'>
+                <button onClick={() => this.wallets()}>sadadsads</button>
                 <Header
                     userName={userName}
                     handleLogOut={handleLogOut}
@@ -74,9 +85,12 @@ class Cantor extends Component {
                     />
                     <Wallet
                         currencies={currencies}
-                        amountMoney={amountMoney}
+                        currenciesDB={this.wallets}
+                        amountMoney={this.props.data.loading ? 'Loading...' : this.props.data.wallets[0].amountMoney}
                         sellCurrency={this.handleSellCurrency}
                     />
+
+
                 </div>
             </div>
         );

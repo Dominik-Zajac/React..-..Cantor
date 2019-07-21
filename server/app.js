@@ -13,14 +13,6 @@ mongoose.connection.once('open', () => {
     console.log('Connected to database');
 });
 
-// app.use('/graphql', cors(), bodyParser.json(), graphqlExpress((req) => {
-//     return {
-//         schema,
-//         context: {
-//             user: req.user
-//         }
-//     };
-// }));
 app.use('/graphql', cors(), graphqlHTTP({
     schema,
     graphiql: true

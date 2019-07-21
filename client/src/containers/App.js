@@ -3,8 +3,8 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
 /* Components */
-import Login from '../components/Login/Login';
-import Cantor from './cantor/Cantor';
+import Login from './Login/Login';
+import Cantor from './Cantor/Cantor';
 
 /* Apollo client */
 const client = new ApolloClient({
@@ -13,41 +13,43 @@ const client = new ApolloClient({
 
 class App extends Component {
     state = {
-        // login: false,
-        // loginName: '',
-        amountMoney: '',
-        login: true,
-        loginName: 'Dominik'
+        login: false,
+        loginName: '',
+        // login: true,
+        // loginName: 'Dominik'
     };
 
-    handleLoginTrue = () => {
-        const { login, loginName, amountMoney } = this.state;
-        const regex = /[0-9]/g;
-        const verificationName = regex.exec(loginName);
-
-        if (!verificationName) {
-            if (loginName.length >= 4 && amountMoney < 100000) {
-                this.setState({
-                    login: !login
-                });
-            } else if (amountMoney > 100000) {
-                alert('The number is too big (max:100000)!');
-            }
-            else {
-                alert('The name is too short!');
-            }
-        } else {
-            alert('In name cannot be numbers!');
-        }
-    };
-
-    handleChangeInput = event => {
-        const name = event.target.name;
+    handleLoginTrue = (name) => {
+        const { login } = this.state;
+        // const regex = /[0-9]/g;
+        // const verificationName = regex.exec(loginName);
 
         this.setState({
-            [name]: event.target.value
+            login: !login,
+            loginName: name
         });
+        //     if (!verificationName) {
+        //         if (loginName.length >= 4) {
+        //             this.setState({
+        //                 login: !login,
+        //                 loginName: name
+
+        //             });
+        //         } else {
+        //             alert('The name is too short!');
+        //         }
+        //     } else {
+        //         alert('In name cannot be numbers!');
+        //     }
     };
+
+    // handleChangeInput = event => {
+    //     const name = event.target.name;
+
+    //     this.setState({
+    //         [name]: event.target.value
+    //     });
+    // };
 
     handleLogOut = () => {
         this.setState({
@@ -70,15 +72,12 @@ class App extends Component {
                     />
                 </ApolloProvider>
                 :
-                // <ApolloProvider client={client}>
+                <ApolloProvider client={client}>
 
-                <Login
-                    loginName={loginName}
-                    amountMoney={amountMoney}
-                    handleButton={this.handleLoginTrue}
-                    handleInput={this.handleChangeInput}
-                />
-            // </ApolloProvider>
+                    <Login
+                        handleLogin={this.handleLoginTrue}
+                    />
+                </ApolloProvider>
 
         );
     };

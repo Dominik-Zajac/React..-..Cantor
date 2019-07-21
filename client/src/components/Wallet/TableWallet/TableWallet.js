@@ -40,9 +40,14 @@ const SellBtn = styled.button`
 `;
 /* ------------------------------- */
 
-const TableWallet = ({ currencies, sellCurrency }) => {
+const TableWallet = ({ currencies, currenciesDB, sellCurrency }) => {
 
     //Mapping the array to individual elements
+    // const arrayCurrenciesDB = currenciesDB.map(currency => {
+    // console.log(currency + 'to')
+    // })
+    // console.log(arrayCurrenciesDB);
+    console.log(`CurrenciesDB ${currenciesDB}`)
     const arrayCurrencies = currencies.map((currency, index) => (
         <Row key={index}>
             <Column>{currency.Code}</Column>

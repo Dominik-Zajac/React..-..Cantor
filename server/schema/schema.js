@@ -8,7 +8,6 @@ const {
     GraphQLSchema,
     GraphQLString,
     GraphQLList,
-    GraphQLNonNull,
     GraphQLObjectType,
 } = graphql;
 
@@ -34,7 +33,6 @@ const RootQuery = new GraphQLObjectType({
             type: UserWallet,
             args: { id: { type: GraphQLID } },
             resolve(parent, args) {
-                // return _.find(users, { id: args.id });
                 return Wallet.findById(args.id);
             }
         },
@@ -77,7 +75,7 @@ const NewUser = new GraphQLObjectType({
             }
         }
     }
-})
+});
 
 module.exports = new GraphQLSchema({
     query: RootQuery,
