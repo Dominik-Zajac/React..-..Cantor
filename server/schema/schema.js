@@ -1,27 +1,16 @@
 const graphql = require('graphql');
 const _ = require('lodash');
+const Wallet = require('../models/wallet');
 
 const {
     GraphQLID,
     GraphQLInt,
     GraphQLSchema,
     GraphQLString,
+    GraphQLList,
+    GraphQLNonNull,
     GraphQLObjectType,
 } = graphql;
-
-var users = [
-    {
-        id: '1',
-        name: 'Dominik',
-        valueUSD: 10,
-        valueEUR: 20,
-        valueCHF: 100,
-        valueRUB: 50,
-        valueCZK: 0,
-        valueGBP: 60,
-        amountMoney: 1500,
-    },
-];
 
 const UserWallet = new GraphQLObjectType({
     name: 'Wallet',
@@ -45,12 +34,52 @@ const RootQuery = new GraphQLObjectType({
             type: UserWallet,
             args: { id: { type: GraphQLID } },
             resolve(parent, args) {
-                return _.find(users, { id: args.id });
+                // return _.find(users, { id: args.id });
+                return Wallet.findById(args.id);
+            }
+        },
+        wallets: {
+            type: new GraphQLList(UserWallet),
+            resolve(parent, args) {
+                return Wallet.find({})
             }
         }
     }
 });
 
+const NewUser = new GraphQLObjectType({
+    name: 'NewUser',
+    fields: {
+        addUser: {
+            type: UserWallet,
+            args: {
+                name: { type: GraphQLString },
+                valueUSD: { type: GraphQLInt },
+                valueEUR: { type: GraphQLInt },
+                valueCHF: { type: GraphQLInt },
+                valueRUB: { type: GraphQLInt },
+                valueCZK: { type: GraphQLInt },
+                valueGBP: { type: GraphQLInt },
+                amountMoney: { type: GraphQLInt }
+            },
+            resolve(parent, args) {
+                let user = new Wallet({
+                    name: args.name,
+                    valueUSD: args.valueUSD,
+                    valueEUR: args.valueEUR,
+                    valueCHF: args.valueCHF,
+                    valueRUB: args.valueRUB,
+                    valueCZK: args.valueCZK,
+                    valueGBP: args.valueGBP,
+                    amountMoney: args.amountMoney
+                });
+                return user.save();
+            }
+        }
+    }
+})
+
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation: NewUser
 });

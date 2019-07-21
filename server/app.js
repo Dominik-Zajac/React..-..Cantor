@@ -2,15 +2,26 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors());
 
 mongoose.connect('mongodb://dominik:pvn4gj@ds351807.mlab.com:51807/cantor');
 mongoose.connection.once('open', () => {
     console.log('Connected to database');
 });
 
-app.use('/graphql', graphqlHTTP({
+// app.use('/graphql', cors(), bodyParser.json(), graphqlExpress((req) => {
+//     return {
+//         schema,
+//         context: {
+//             user: req.user
+//         }
+//     };
+// }));
+app.use('/graphql', cors(), graphqlHTTP({
     schema,
     graphiql: true
 }));

@@ -1,10 +1,28 @@
 import React, { Component } from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
 import './Cantor.css';
 
 /* Components */
 import Header from '../../components/Header/Header';
 import Currencies from '../../components/Currencies/Currencies';
 import Wallet from '../../components/Wallet/Wallet';
+
+const getWalletQuery = gql`
+    {
+        wallets {
+            id
+            name
+            valueUSD
+            valueEUR
+            valueCHF
+            valueRUB
+            valueCZK
+            valueGBP
+            amountMoney
+        }
+    }
+`
 
 class Cantor extends Component {
     constructor(props) {
@@ -38,7 +56,7 @@ class Cantor extends Component {
     };
 
     render() {
-
+        console.log(this.props)
         const { userName, handleLogOut, amountMoney } = this.props;
         const { currencies, publicationDate } = this.state;
 
@@ -65,4 +83,4 @@ class Cantor extends Component {
     };
 };
 
-export default Cantor;
+export default graphql(getWalletQuery)(Cantor);

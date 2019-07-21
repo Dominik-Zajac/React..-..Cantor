@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
 
 /* Components */
 import Login from '../components/Login/Login';
 import Cantor from './cantor/Cantor';
+
+/* Apollo client */
+const client = new ApolloClient({
+    uri: 'http://localhost:4000/graphql'
+});
 
 class App extends Component {
     state = {
@@ -55,18 +62,24 @@ class App extends Component {
 
         return (
             loginData ?
-                <Cantor
-                    userName={loginName}
-                    amountMoney={amountMoney}
-                    handleLogOut={this.handleLogOut}
-                />
+                <ApolloProvider client={client}>
+                    <Cantor
+                        userName={loginName}
+                        amountMoney={amountMoney}
+                        handleLogOut={this.handleLogOut}
+                    />
+                </ApolloProvider>
                 :
+                // <ApolloProvider client={client}>
+
                 <Login
                     loginName={loginName}
                     amountMoney={amountMoney}
                     handleButton={this.handleLoginTrue}
                     handleInput={this.handleChangeInput}
                 />
+            // </ApolloProvider>
+
         );
     };
 };
